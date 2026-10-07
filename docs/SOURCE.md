@@ -4,6 +4,12 @@ The two `studies/*/source/` trees contain the frozen CSDP implementation used in
 
 The adaptation is in `custom/goodnessModCell.py`: fixed equal contiguous groups, scaled logits, and a mean group BCE. G=1 retains the original branch. The supplement changes only the allowed group-count guard and its error message; see its `source_change_record.json`.
 
-Historical protocols may mention original local paths. They are records, not the runnable entry point; use `run.py` with the paths documented here.
+Use `run.py` as the portable entry point. Frozen records and workers are evidence, not a second user-facing configuration API.
 
 The upstream author-source regression matched 70 arrays over 50 learning steps in the local audit. The notebook separately checks the frozen modulator. That does not reproduce the published paper's best benchmark accuracy.
+
+## Why some old code remains
+
+The frozen source retains an upstream `FIXME`, commented legacy lines and disabled compensation branches. The constructor rejects compensation, nonnegative-weight and loading options in this study. These branches are not selectable methods in this demo. I retained their exact bytes for protocol hashes and baseline regression rather than quietly clean up the historical implementation.
+
+The new presentation helpers use readable names and separate statistics from plotting. No numerical training code was changed for this cleanup.

@@ -45,3 +45,15 @@ The full studies cost much more than a pair. The primary wrapper runs sequential
 `studies/` holds the original frozen protocols, source manifests and source snapshots. `src/run_grouped_*.py` is preserved byte-for-byte. Run it through `run.py`, which supplies the portable paths. Editing a frozen runner or model triggers a hash failure.
 
 This repository uses JAX/ngclearn. snnTorch was an optional example in the supervisor's email, so I have not added an unused dependency or changed frameworks to match its name.
+
+## Code and lightweight checks
+
+```sh
+python -m unittest discover -s tests
+```
+
+These checks cover incomplete or duplicated records, prediction/accuracy mismatches and the paired-interval calculation. They do not replace training or establish scientific validity by themselves.
+
+`src/config.py` reads the frozen JSON protocols; it is not a mutable hyperparameter override. To explore new settings, use a separate branch and new protocol rather than edit this study's hashes. The actual learning rate and contrastive batch are printed at the top of the notebook.
+
+Each completed fresh study writes both `training/epochs.csv` and `training/trial_metrics.csv`, alongside the full JSON records. The runner checks the planned seed/group set before exporting; failed training is not silently omitted. Verbose library and training output goes to local log files, while the notebook shows only the checks and summaries. Saved-result plots never start training.

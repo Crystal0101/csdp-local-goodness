@@ -52,11 +52,26 @@ This runs source checks and trains the fixed first G1/G8 pair for five epochs. O
 
 I kept the author's **JAX/ngclearn** implementation to avoid changing the learning dynamics during a framework port. The supervisor suggested snnTorch as an example, not a requirement; this demo does not import or depend on snnTorch.
 
+## Code map
+
+Analysis, plotting and reproduction orchestration are separate modules in `src/`. The notebook serves as the presentation interface for results and discussion. The hash-locked model and training equations remain in `studies/*/source/` and `src/run_grouped_*.py`; I have not rewritten them for style.
+
+| Read this | To inspect |
+|---|---|
+| `src/config.py` and `studies/*/protocol.json` | Frozen seed lists, groups, budgets and settings |
+| `studies/primary/source/custom/goodnessModCell.py` | The actual grouped goodness calculation |
+| `src/trainer.py` | Portable training orchestration and process isolation |
+| `src/results.py` | Prediction checks, paired records and CSV export |
+| `src/stats.py` | Paired intervals and the four-contrast correction |
+| `src/plotting.py` | Deterministic plots from saved results |
+
+The model uses explicit JAX keys, not PyTorch's global seed. The frozen runner splits those keys before initialization; encoder keys then evolve across training and validation. I do not reset them between phases. Plotting adds no jitter or random resampling, so it needs no plotting seed. Numerical or font differences across platforms are still possible.
+
 ## Files
 
 - `demo.ipynb`: the experiment and its interpretation.
 - `src/`, `studies/`: runner helpers, frozen model source and protocols.
-- `results/`: all 750 epoch predictions, accuracies and pairing checks, in small text files.
+- `results/`: all 750 epoch predictions, per-trial final metrics and pairing checks, in small text files.
 - `docs/`: the appendix and a short record of the route I abandoned.
 
 No checkpoints, datasets, environments, ZIPs or third-party paper PDFs are included. Full probability arrays and batch traces remain in my local research archive; rerunning generates fresh records. This compact export checks saved predictions, not omitted probability arrays.
@@ -70,3 +85,7 @@ The upstream BSD-3-Clause notices are retained with both source snapshots. [Sour
 ## License
 
 BSD-3-Clause; see [LICENSE](LICENSE). The vendored CSDP source retains its upstream copyright and license notices.
+
+## Review and release
+
+This is a local review candidate. Publication, the proposal tag and a GitHub Release require my manual approval. The [release checklist](docs/REVIEW_AND_RELEASE.md) separates the current evidence from future mechanism work.
