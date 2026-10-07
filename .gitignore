@@ -1,0 +1,46 @@
+# Generated training output stays outside the reviewed source snapshot.
+fresh_runs/
+checkpoints/
+**/checkpoints/
+data/
+datasets/
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.pkl
+*.pickle
+
+# Python and notebook caches
+.venv*/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# Scratch exports only; results/*.csv and final figures remain tracked.
+tmp/
+temp/
+scratch/
+drafts/
+logs/
+*.log
+*.tmp
+*.bak
+*.zip
+.DS_Store
+
+# Local credentials and private keys
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+credentials.json
+secrets.json
