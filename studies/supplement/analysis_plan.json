@@ -1,0 +1,62 @@
+{
+  "created_utc": "2026-10-07T12:08:37.789674+00:00",
+  "status": "analysis plan fixed before supplementary outcomes; code freeze follows independent review",
+  "purpose": "Characterise locality-accuracy sensitivity and longer-budget behaviour, not choose best G or erase worst seed",
+  "groups": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "seeds": [
+    13001,
+    13002,
+    13003,
+    13004,
+    13005,
+    13006,
+    13007,
+    13008,
+    13009,
+    13010
+  ],
+  "epochs_by_group": {
+    "1": 20,
+    "2": 5,
+    "4": 5,
+    "8": 20,
+    "16": 5
+  },
+  "endpoints": {
+    "group_curve": 5,
+    "long_budget": 20
+  },
+  "total_models": 50,
+  "total_training_epochs": 550,
+  "unchanged": "Architecture64-256-64-10,raw batch98,T50,dt3,learning rates/initialization/negative generation and historical train/valid split from previous study; same validation after every epoch",
+  "pairing": "Same ten seeds across all groups, initial weights and RNG schedule checked. Encoder keys will be passively recorded; no additional training/evaluation calls. Epoch5 prefixes retained for G1/G8 longer runs.",
+  "statistical_unit": "paired training seed, n10. No pooling validation samples or pooling historical20 seeds.",
+  "group_curve_analysis": {
+    "comparisons": [
+      "G2-G1",
+      "G4-G1",
+      "G8-G1",
+      "G16-G1"
+    ],
+    "point_estimate": "mean paired difference in percentage points",
+    "interval": "familywise95% Bonferroni intervals: each two-sided98.75% Student t df9; pointwise95% may be shown labelled descriptive",
+    "retention_margin_pp": -1,
+    "interpretation": "Even a favourable interval does not select a replacement G or establish independent-data generalization; include all curves and per-seed outcomes"
+  },
+  "long_budget_analysis": {
+    "comparison": "G8-G1 at epoch20",
+    "interval": "two-sided95% paired Student t df9",
+    "retention_margin_pp": -1,
+    "role": "separate budget robustness check, not a replacement for original 20-pair primary claim",
+    "interaction": "paired [G8-G1 at20] minus [G8-G1 at5] with descriptive95%t interval; not a second pass/fail test"
+  },
+  "individual_risk": "report number/proportion of negative paired differences and differences below -1pp, min/median/max; descriptive empirical seed frequencies, not calibrated future-run failure probabilities",
+  "stop_rules": "Run all50 fixed models without intermediate statistical stopping; preserve failed logs. Any nonfinite or integrity failure stops queue for code diagnosis, never replace algorithmic failed seeds silently. No changes to G,epochs,margin or learning rates after outcomes.",
+  "scope": "Supplement designed after original results; same reused validation; new training seeds only. Not independent-data confirmation, convergence proof, patient/privacy/Dale result or measured system-efficiency claim."
+}

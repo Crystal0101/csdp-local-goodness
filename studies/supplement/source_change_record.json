@@ -1,0 +1,24 @@
+{
+  "original_manifest": {
+    "LICENSE": "9f5bf928c8c06b2168e7b6fe07c33fd288c8416d1e0f7d0c84bbda7f6afe3b24",
+    "csdp_model.py": "7b58c4f165763e7620c5ed90dc1aa098d785d794bd028d3b59c8ac78c7d30046",
+    "img_utils.py": "81b67a7801cb2c9bd65dcaa0481b0a76a695fafc50c238afd7672b272cf18713",
+    "custom/__init__.py": "4de615e9b9f2fde11a7b56c04d3768fca2d8ef83f513d6043d9fc265946fa431",
+    "custom/CSDPSynapse.py": "d8ecdd688a6999b682adafbd8de2ffc325c120b023dc325843228f65802ca9c6",
+    "custom/maskedErrorCell.py": "4b37ac09914296708683ac7012a1ab71058b3ee2ed91e2b9aec3812b9257d836",
+    "custom/goodnessModCell.py": "80af8384ae00e1a66ad5e9c3a93fbb41912998f5cd30ca50f9d16b05b99f5cc7"
+  },
+  "supplement_manifest": {
+    "LICENSE": "9f5bf928c8c06b2168e7b6fe07c33fd288c8416d1e0f7d0c84bbda7f6afe3b24",
+    "csdp_model.py": "7b58c4f165763e7620c5ed90dc1aa098d785d794bd028d3b59c8ac78c7d30046",
+    "img_utils.py": "81b67a7801cb2c9bd65dcaa0481b0a76a695fafc50c238afd7672b272cf18713",
+    "custom/__init__.py": "4de615e9b9f2fde11a7b56c04d3768fca2d8ef83f513d6043d9fc265946fa431",
+    "custom/CSDPSynapse.py": "d8ecdd688a6999b682adafbd8de2ffc325c120b023dc325843228f65802ca9c6",
+    "custom/maskedErrorCell.py": "4b37ac09914296708683ac7012a1ab71058b3ee2ed91e2b9aec3812b9257d836",
+    "custom/goodnessModCell.py": "52549997bfd7d0244406ebc27749a712119ac6450385336cf23e2f7b207eb83b"
+  },
+  "changed_files": [
+    "custom/goodnessModCell.py"
+  ],
+  "change": "Only allowed-group guard and its diagnostic message; no numerical source changes"
+}

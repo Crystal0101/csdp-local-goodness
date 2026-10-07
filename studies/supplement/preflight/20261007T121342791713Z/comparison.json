@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "comparisons": [
+    {
+      "group": 1,
+      "initial_weights_equal": true,
+      "explicit_stream_equal": true,
+      "labels_equal": true,
+      "parameters_equal": true,
+      "epoch_prediction_equal": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "epoch_probability_equal": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "curves_equal": true,
+      "passed": true
+    },
+    {
+      "group": 8,
+      "initial_weights_equal": true,
+      "explicit_stream_equal": true,
+      "labels_equal": true,
+      "parameters_equal": true,
+      "epoch_prediction_equal": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "epoch_probability_equal": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "curves_equal": true,
+      "passed": true
+    }
+  ],
+  "encoder_boundaries_equal_across_G": true,
+  "historical_results_unchanged": true
+}

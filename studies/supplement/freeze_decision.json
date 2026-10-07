@@ -1,0 +1,43 @@
+{
+  "utc": "2026-10-07T12:16:45.699674+00:00",
+  "status": "approved for fixed supplementary execution after independent code review, mechanism and historical-prefix preflight",
+  "protocol_sha256": "bf348b0e4c475b6bb2215f69159fc73f7db98bd099d855a1d676901951fe4d6b",
+  "analysis_plan_sha256": "cc7ded04c9b823d8cc0641aeb4b42750c8cb98b83d9470f0773f2584433a1c72",
+  "analysis_script_sha256": "96348059e0d4e48fba218e7a47a5d579d3120185a96d82004118101e3ad50c5d",
+  "code_review_sha256": "40b0184c094b2adbedb4759fcebb264f807548a59e0ff4f1d002c81041ca1ed8",
+  "mechanism_result_sha256": "558af67a081c352627a7c5e6a038f438e2a75e72ef2804c7343296c0f8747e17",
+  "preflight_comparison_sha256": "4a8d4ce554639dfeef534487d20af40f81597458fc555000bacfe52c2722a435",
+  "groups": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "seeds": [
+    13001,
+    13002,
+    13003,
+    13004,
+    13005,
+    13006,
+    13007,
+    13008,
+    13009,
+    13010
+  ],
+  "epochs_by_group": {
+    "1": 20,
+    "2": 5,
+    "4": 5,
+    "8": 20,
+    "16": 5
+  },
+  "n_models": 50,
+  "n_training_epochs": 550,
+  "workers": 2,
+  "primary_study_unchanged": true,
+  "no_selection": "Retain G8 as original target; all G curves reported, no best-group substitution. Original20pair primary and supplement10pair remain separate.",
+  "analysis": "Four G contrasts at epoch5 familywise95% Bonferroni intervals; epoch20 G8-G1 separately95%t, no claim of familywise coverage jointly with all endpoints.",
+  "conditions": "No test load, no adaptive seed/budget/margin/hyperparameters, preserve every run and failure."
+}

@@ -1,0 +1,17 @@
+{
+  "seed": 12001,
+  "groups": [
+    1,
+    8
+  ],
+  "epochs": 5,
+  "supplement_protocol_sha256": "bf348b0e4c475b6bb2215f69159fc73f7db98bd099d855a1d676901951fe4d6b",
+  "original_protocol_sha256": "4e8d83aca76fdc1e11127cfc204b46611424b5546cb511ffda893969b889f2fd",
+  "runner_sha256": "fb1facb385ee587090243b6f38cfae489269687fcb31b59d59ad07c90ea4fbe0",
+  "historical_result_sha256": {
+    "1": "e3738123f7ead3a65ebae4227dcdaf8b71275763fab8de1688de2b7541f73374",
+    "8": "2b4fd067cecfea680f280b90e0f0e5982cdd15698f6e5a93e46f14a9a6f2a9f0"
+  },
+  "endpoint": "Exact saved predictions and probability arrays at every epoch; identical explicit random streams and initial weights",
+  "no_tuning": "Run once, retain any mismatch; this does not license additional supplementary runs"
+}

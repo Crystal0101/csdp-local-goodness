@@ -1,0 +1,72 @@
+{
+  "utc": "2026-10-07T12:13:19.989761+00:00",
+  "stage": "post-hoc supplementary sensitivity on reused data; never a replacement primary analysis or group selection",
+  "groups": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "seeds": [
+    13001,
+    13002,
+    13003,
+    13004,
+    13005,
+    13006,
+    13007,
+    13008,
+    13009,
+    13010
+  ],
+  "epochs_by_group": {
+    "1": 20,
+    "2": 5,
+    "4": 5,
+    "8": 20,
+    "16": 5
+  },
+  "model_count": 50,
+  "training_epoch_count": 550,
+  "architecture": [
+    64,
+    256,
+    64,
+    10
+  ],
+  "batch": 98,
+  "effective_contrastive_batch": 196,
+  "T": 50,
+  "dt": 3.0,
+  "constructor_eta_requested": 0.002,
+  "actual_eta_w": 0.001,
+  "actual_weight_decay": 7e-05,
+  "learning_rate_basis": "Unchanged csdp_model.py constructor heuristic for raw batch98 overrides requested eta",
+  "learn_recon": true,
+  "theta": 10.0,
+  "partition": "fixed equal contiguous groups",
+  "endpoints": "epoch5 for all groups; epochs5 and20 for G1/G8; all epoch curves/predictions retained, no best-epoch/group selection",
+  "encoder_logging": "read-only z0.key.value and z3.key.value at creation and before training/before validation/after validation each epoch; no extra process or key reset",
+  "original_protocol_sha256": "4e8d83aca76fdc1e11127cfc204b46611424b5546cb511ffda893969b889f2fd",
+  "original_source_manifest_sha256": "80c05dae2315ede16c6b010dafafcd72c1be742a6e162997d8cb627f81096d51",
+  "data_files": {
+    "trainX.npy": "c86bed51f54c4c955fbc58d09deb7490fcf28601f18c1a2532a66bf3a50b4413",
+    "trainY.npy": "aecafb58415e641eecd957fc6f025fcb66a42cd9bef9847f7d79fd1502a0ca26",
+    "validX.npy": "5feb04347bf938ec48ce2d01c4950fb479d123d4e21bbdb62d21afedf858911c",
+    "validY.npy": "051a9f91428abd8f5b7c68750cd0ceb0f5c8275d804c6ae8d4f64594a0fd09c1"
+  },
+  "code_sha256": "fb1facb385ee587090243b6f38cfae489269687fcb31b59d59ad07c90ea4fbe0",
+  "source_manifest_sha256": "8e9d9ced5d7d698aa40976b89578967e5c9e1198914658b50d07c1ac9bdfd4e2",
+  "source_change_record_sha256": "65561f89e6c9fe6268c200f599397ff82b9c57593f61fa1e8468ec529efce91a",
+  "analysis_plan_sha256": "cc7ded04c9b823d8cc0641aeb4b42750c8cb98b83d9470f0773f2584433a1c72",
+  "preflight": "Before supplementary training: independent seed12001 G1/G8 five-epoch runs compared to historical predictions at all five epochs",
+  "run_gate": "Separate root-reviewed freeze_decision.json required and must match protocol hash; statistical plan belongs to that reviewed decision",
+  "forbidden": "test split, replacing old results, picking bestG, changing epochs/seeds in reaction to results",
+  "caveats": [
+    "same historically reused split",
+    "post-hoc supplement, not preregistered original hypothesis",
+    "epoch20 need not imply convergence",
+    "only modulator dependence, no whole-network cost claim"
+  ]
+}
