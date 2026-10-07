@@ -1,6 +1,6 @@
 # Review before publication
 
-The repository is a local review candidate. No remote push, release or proposal tag is authorized until Ning Yang has reviewed the material and explicitly approved publication.
+Ning Yang authorized GitHub publication on 7 October 2026 after local review and validation. Publication preserves the existing packaging history and original commit timestamps. This authorization does not include sending email to the supervisor.
 
 ## What the supervisor should see first
 

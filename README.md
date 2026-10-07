@@ -88,4 +88,4 @@ BSD-3-Clause; see [LICENSE](LICENSE). The vendored CSDP source retains its upstr
 
 ## Review and release
 
-This is a local review candidate. Publication, the proposal tag and a GitHub Release require my manual approval. The [release checklist](docs/REVIEW_AND_RELEASE.md) separates the current evidence from future mechanism work.
+Publication was approved by Ning Yang on 7 October 2026. The proposal appendix is identified by the `v1.0-proposal-appendix` tag. The [release checklist](docs/REVIEW_AND_RELEASE.md) separates this evidence from future mechanism work. The tag will not be moved; corrections will be disclosed separately.
