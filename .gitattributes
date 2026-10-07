@@ -1,0 +1,5 @@
+# Preserve frozen bytes: protocol and source hashes must survive checkout.
+studies/** -text
+studies/*/source/** -whitespace
+src/run_grouped_csdp_replication.py -text
+src/run_grouped_supplement.py -text

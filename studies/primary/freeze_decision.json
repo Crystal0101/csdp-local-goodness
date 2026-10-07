@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-07",
+  "stage": "locked-method conditional seed replication, not independent-data confirmation",
+  "protocol_sha256": "4e8d83aca76fdc1e11127cfc204b46611424b5546cb511ffda893969b889f2fd",
+  "groups": [
+    1,
+    8
+  ],
+  "seeds": [
+    12001,
+    12002,
+    12003,
+    12004,
+    12005,
+    12006,
+    12007,
+    12008,
+    12009,
+    12010,
+    12011,
+    12012,
+    12013,
+    12014,
+    12015,
+    12016,
+    12017,
+    12018,
+    12019,
+    12020
+  ],
+  "epochs": 5,
+  "primary_endpoint": "paired G8-G1 final validation accuracy difference in percentage points across 20 seeds",
+  "primary_interval": "two-sided 95% Student t paired interval with df19",
+  "accuracy_retention_gate": "lower confidence limit strictly greater than -1.0 pp",
+  "required_checks": [
+    "G1 complete original-code learning regression",
+    "G8 exact block dependency check",
+    "matched initial weights and explicit random streams",
+    "identical model parameter count and training budget",
+    "all fixed runs present, no unresolved algorithm failures",
+    "finite weights/states/predictions and no true-label input at evaluation"
+  ],
+  "bootstrap": "fixed 20000 paired seed resamples seed87123; sensitivity, not alternative favorable primary analysis",
+  "failure_policy": "retain all data; no added seeds, group selection, checkpoint selection or margin relaxation",
+  "claim_boundary": "Conditional seed variability on a reused fixed development dataset. No patient/population generalization, new algorithm, Dale/DP or whole-network locality claim.",
+  "development_summary_sha256": "43f5d1a6deaa101b74e07ce4a13e091f4522d74a0eb2958158d7ea374205bc35",
+  "sample_size_rationale": "20 prespecified pairs; planned SD1.5pp gives approximately0.70pp two-sided95% half-width, precision planning not guaranteed power"
+}

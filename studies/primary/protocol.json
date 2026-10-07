@@ -1,0 +1,85 @@
+{
+  "utc": "2026-10-07T10:54:14.483689+00:00",
+  "stage": "locked-method conditional new-seed replication on reused data; not independent-data confirmation",
+  "question": "On this fixed reused split, is the lower endpoint of the paired seed-difference 95 percent t interval above minus 1 percentage point?",
+  "groups": [
+    1,
+    8
+  ],
+  "seeds": [
+    12001,
+    12002,
+    12003,
+    12004,
+    12005,
+    12006,
+    12007,
+    12008,
+    12009,
+    12010,
+    12011,
+    12012,
+    12013,
+    12014,
+    12015,
+    12016,
+    12017,
+    12018,
+    12019,
+    12020
+  ],
+  "architecture": [
+    64,
+    256,
+    64,
+    10
+  ],
+  "batch": 98,
+  "T": 50,
+  "dt": 3.0,
+  "epochs": 5,
+  "learn_recon": true,
+  "source": "grouped_csdp_scope G1 reproduces original one-batch complete learning bitwise; no Dale/no compensation",
+  "formula": "G*sum(z_group^2)-theta; mean over batch and groups BCE, unchanged theta=10; derivative 2z/B*(sigmoid-group-label). G1 exact original branch. Objective changes for G8.",
+  "partition": "fixed contiguous equal-size groups, no selection",
+  "dependency_units": {
+    "G1": [
+      256,
+      64
+    ],
+    "G8": [
+      32,
+      8
+    ]
+  },
+  "dependency_boundary": "only instantaneous goodness modulator; shared labels, recurrent connections and readout errors remain. No whole-network communication/energy claim.",
+  "endpoints": "validation accuracy epoch 5; all epoch curves retained; no checkpoint selection",
+  "primary_analysis": {
+    "paired_difference": "G8 minus G1 final epoch validation accuracy percentage points",
+    "n": 20,
+    "interval": "two-sided Student t paired seed mean 95 percent",
+    "success": "lower endpoint > -1.0 pp and all integrity/mechanism checks passed",
+    "sensitivity": "paired-seed percentile bootstrap, fixed RNG 87123, 20000 resamples; not alternative primary decision"
+  },
+  "sample_size_rationale": "fixed 20, conservative assumed paired SD 1.5 pp gives t19 half-width about 0.70 pp; no guaranteed power",
+  "excluded_development_seeds": [
+    951,
+    952,
+    953
+  ],
+  "data_files": {
+    "trainX.npy": "c86bed51f54c4c955fbc58d09deb7490fcf28601f18c1a2532a66bf3a50b4413",
+    "trainY.npy": "aecafb58415e641eecd957fc6f025fcb66a42cd9bef9847f7d79fd1502a0ca26",
+    "validX.npy": "5feb04347bf938ec48ce2d01c4950fb479d123d4e21bbdb62d21afedf858911c",
+    "validY.npy": "051a9f91428abd8f5b7c68750cd0ceb0f5c8275d804c6ae8d4f64594a0fd09c1"
+  },
+  "forbidden": "test data, group/hyperparameter search, additional seeds or epochs based on results",
+  "code_sha256": "401472ccad24b30d1b3b28adfe57a6705348fad2e4ec445387f2cc7b6453c146",
+  "source_manifest_sha256": "80c05dae2315ede16c6b010dafafcd72c1be742a6e162997d8cb627f81096d51",
+  "caveats": [
+    "historical validation reused",
+    "fixed 5-epoch budget not convergence",
+    "group/layer helper has published precedent, no novelty claim",
+    "uncertainty conditional on same reused dataset; no independent population evidence"
+  ]
+}
