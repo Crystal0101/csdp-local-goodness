@@ -123,7 +123,10 @@ def main() -> None:
     actual = set()
     for file in (output / "training/runs").glob("*/result.json"):
         record = read_json(file)
-        actual.add((record["group"], record["seed"]))
+        identity = (record["group"], record["seed"])
+        if identity in actual or file.parent.name != f"G{identity[0]}_{identity[1]}":
+            raise ValueError("Duplicate run or directory/record identity mismatch")
+        actual.add(identity)
     if actual != expected:
         raise ValueError("Fresh output is missing a planned run")
     export_training_csv(output / "training", args.study)

@@ -60,7 +60,38 @@ def load_saved_results(directory: Path | None = None) -> SavedResults:
     if set(records) != expected:
         raise ValueError("Missing or unexpected seed/group/epoch records")
     verify_pairing(read_json(directory / "pairing.json"))
+    verify_trial_metrics(directory / "trial_metrics.csv", accuracy)
     return SavedResults(accuracy, records)
+
+
+def verify_trial_metrics(path: Path, accuracy: dict) -> None:
+    """The convenient final-epoch table must agree with the full epoch evidence."""
+    expected = {}
+    for cohort in ("primary", "supplement"):
+        config = load_config(cohort)
+        for group in config.groups:
+            for seed in config.seeds:
+                budget = config.epochs[group]
+                expected[cohort, group, seed] = (budget, accuracy[cohort, group, seed, budget])
+    seen = set()
+    with path.open(newline="") as file:
+        reader = csv.DictReader(file)
+        if set(reader.fieldnames or []) != {
+            "cohort", "group", "seed", "epochs", "final_accuracy_percent"
+        }:
+            raise ValueError("Unexpected final-metrics schema")
+        for row in reader:
+            key = (row["cohort"], int(row["group"]), int(row["seed"]))
+            if key in seen or key not in expected:
+                raise ValueError("Duplicate or unexpected final-metrics record")
+            seen.add(key)
+            budget, final_accuracy = expected[key]
+            value = float(row["final_accuracy_percent"])
+            if (int(row["epochs"]) != budget or not np.isfinite(value)
+                    or abs(value - final_accuracy) > 1e-10):
+                raise ValueError("Final-metrics table differs from epoch predictions")
+    if seen != set(expected):
+        raise ValueError("Final-metrics table is incomplete")
 
 
 def verify_pairing(pairing: dict) -> None:
@@ -93,9 +124,14 @@ def export_training_csv(training: Path, cohort: str) -> tuple[Path, Path]:
     """Save every completed run; the caller checks the planned seed/group set."""
     epoch_rows, trial_rows = [], []
     config = load_config(cohort)
+    seen = set()
+    expected_labels = np.asarray(read_json(ROOT / "results/labels.json"))
     for file in sorted((training / "runs").glob("*/result.json")):
         run = read_json(file)
         group, seed = run["group"], run["seed"]
+        if (group, seed) in seen or file.parent.name != f"G{group}_{seed}":
+            raise ValueError("Duplicate run or directory/record identity mismatch")
+        seen.add((group, seed))
         config.validate_group(group)
         if seed not in config.seeds:
             raise ValueError("Unexpected seed in fresh output")
@@ -107,14 +143,21 @@ def export_training_csv(training: Path, cohort: str) -> tuple[Path, Path]:
                 or [row["epoch"] for row in run["curves"]] != expected_epochs):
             raise ValueError("Fresh epochs must be complete and ordered")
         labels = np.asarray(run["labels"])
+        if not np.array_equal(labels, expected_labels):
+            raise ValueError("Fresh labels differ from the frozen validation split")
         for curve, epoch in zip(run["curves"], run["epoch_results"]):
             prediction = np.asarray(epoch["predictions"])
             probabilities = np.asarray(epoch["probabilities"])
+            if prediction.shape != labels.shape or not np.issubdtype(prediction.dtype, np.integer):
+                raise ValueError("Invalid fresh prediction shape or type")
+            if probabilities.shape != (len(labels), config.architecture[-1]):
+                raise ValueError("Invalid fresh probability shape")
             if not np.isfinite(probabilities).all():
                 raise ValueError("Nonfinite fresh probability")
             np.testing.assert_array_equal(probabilities.argmax(1), prediction)
             measured = float(np.mean(prediction == labels))
-            if abs(measured - curve["validation_accuracy"]) > 1e-12:
+            curve_accuracy = float(curve["validation_accuracy"])
+            if not np.isfinite(curve_accuracy) or abs(measured - curve_accuracy) > 1e-12:
                 raise ValueError("Fresh prediction/accuracy mismatch")
             epoch_rows.append({
                 "cohort": cohort, "group": group, "seed": seed,
@@ -122,12 +165,13 @@ def export_training_csv(training: Path, cohort: str) -> tuple[Path, Path]:
                 "predictions": " ".join(map(str, prediction)),
                 "probabilities_sha256": probability_digest(epoch["probabilities"]),
             })
-        if abs(measured - run["final_validation_accuracy"]) > 1e-12:
+        final_accuracy = float(run["final_validation_accuracy"])
+        if not np.isfinite(final_accuracy) or abs(measured - final_accuracy) > 1e-12:
             raise ValueError("Final accuracy differs from the last epoch")
         trial_rows.append({
             "cohort": cohort, "group": group, "seed": seed,
             "epochs": len(run["epoch_results"]),
-            "final_accuracy": run["final_validation_accuracy"],
+            "final_accuracy_percent": 100 * final_accuracy,
         })
     if not epoch_rows:
         raise ValueError("No completed runs to export")

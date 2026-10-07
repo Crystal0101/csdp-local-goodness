@@ -57,3 +57,14 @@ These checks cover incomplete or duplicated records, prediction/accuracy mismatc
 `src/config.py` reads the frozen JSON protocols; it is not a mutable hyperparameter override. To explore new settings, use a separate branch and new protocol rather than edit this study's hashes. The actual learning rate and contrastive batch are printed at the top of the notebook.
 
 Each completed fresh study writes both `training/epochs.csv` and `training/trial_metrics.csv`, alongside the full JSON records. The runner checks the planned seed/group set before exporting; failed training is not silently omitted. Verbose library and training output goes to local log files, while the notebook shows only the checks and summaries. Saved-result plots never start training.
+
+The final-metrics CSV uses `final_accuracy_percent` in both the saved study and fresh exports. Epoch CSV accuracy and the frozen runner's JSON values remain proportions in [0, 1]. The loader checks all 90 final rows against the last epoch, and rejects duplicates, nonfinite metrics, wrong prediction shapes and incomplete epochs.
+
+## Final local audit
+
+```sh
+python -m unittest discover -s tests
+python audit_delivery.py --require-clean
+```
+
+The audit checks saved evidence, source hashes, ordered notebook execution counts, English-only text, file sizes and commit identity. PDF text is scanned when Poppler's `pdftotext` is available; the command reports whether that check ran. This audit does not rerun training, install dependencies or publish anything. Use `execute_notebook.py` after changes that affect execution, and review the rendered figures and PDF before release.
