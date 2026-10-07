@@ -3,3 +3,6 @@ studies/** -text
 studies/*/source/** -whitespace
 src/run_grouped_csdp_replication.py -text
 src/run_grouped_supplement.py -text
+
+# CSV exports use standard CRLF; preserve bytes without flagging CR as whitespace.
+results/*.csv -text whitespace=cr-at-eol

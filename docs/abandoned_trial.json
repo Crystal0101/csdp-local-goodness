@@ -1,0 +1,89 @@
+{
+  "summary.json": {
+    "sha256": "ed3f2f850e06d470d61bfc1af3b46d969a9b0a51aaf9d48454ada658593d6017",
+    "record": {
+      "status": "all finite development runs completed",
+      "n_seeds": 3,
+      "rows": [
+        {
+          "mode": "native",
+          "seed": 931,
+          "validation_accuracy": 0.6155988857938719
+        },
+        {
+          "mode": "magnitude",
+          "seed": 931,
+          "validation_accuracy": 0.637883008356546
+        },
+        {
+          "mode": "none",
+          "seed": 931,
+          "validation_accuracy": 0.6713091922005571
+        },
+        {
+          "mode": "native",
+          "seed": 932,
+          "validation_accuracy": 0.7103064066852368
+        },
+        {
+          "mode": "magnitude",
+          "seed": 932,
+          "validation_accuracy": 0.7103064066852368
+        },
+        {
+          "mode": "none",
+          "seed": 932,
+          "validation_accuracy": 0.49025069637883006
+        },
+        {
+          "mode": "native",
+          "seed": 933,
+          "validation_accuracy": 0.7938718662952646
+        },
+        {
+          "mode": "magnitude",
+          "seed": 933,
+          "validation_accuracy": 0.7827298050139275
+        },
+        {
+          "mode": "none",
+          "seed": 933,
+          "validation_accuracy": 0.637883008356546
+        }
+      ],
+      "initial_weights_and_explicit_random_streams_matched": true,
+      "interpretation": "report all differences; n=3 exploratory, not confirmation; no model chosen automatically"
+    }
+  },
+  "decision_gate.json": {
+    "sha256": "462f0d92fe7836af7713a3fbcbb755ebb46d8bb198b957acc3ca54e146372d39",
+    "record": {
+      "date": "2026-10-07",
+      "stage": "limited mechanism development, not confirmation",
+      "seeds": [
+        931,
+        932,
+        933
+      ],
+      "epochs": 5,
+      "candidate": "magnitude",
+      "comparators": [
+        "native",
+        "none"
+      ],
+      "primary_development_metric": "validation accuracy at final epoch 5, no best-epoch selection",
+      "continuation_gate": {
+        "mean_difference_pp_at_least": 1.0,
+        "each_paired_seed_difference_strictly_positive": true,
+        "must_pass_against_both_comparators": true,
+        "all_source_sign_checks_pass": true,
+        "finite_states": true,
+        "matched_initial_parameters_and_rng_protocol": true
+      },
+      "interpretation": "Engineering screen only; no significance or novelty claim. Passing permits additional verification, does not establish improvement. Failure stops confirmatory escalation of this candidate. All results retained.",
+      "scope": "All 10 declared synaptic paths, including all-E external input/label sources; no complete biological locality claim.",
+      "data": "historical train and validation only; no test access",
+      "E0": "mechanism reference only; full E0/comparison and confirmation prerequisites remain unresolved"
+    }
+  }
+}

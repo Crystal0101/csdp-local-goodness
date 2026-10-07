@@ -2,7 +2,7 @@
 
 I used CSDP to explore learning beyond approximations to backpropagation. Its goodness signal uses activity from the whole layer. I replaced that calculation with fixed groups and asked how much accuracy this smaller dependency costs.
 
-> Local preparation: this first commit records the README, license and dependencies. The existing notebook, source and results will be added in separate preparation commits after review. This history packages completed experiments; it is not a reconstruction of their original development chronology.
+> These commits package completed experiments in reviewable steps; they do not reconstruct the original development chronology. Frozen experiment protocols are kept in `studies/`.
 
 **[Open the notebook](demo.ipynb).** It contains the mechanism check, every seed, the extra group-count experiment and a fresh training run. The [two-page appendix](docs/appendix.pdf) is the short version.
 
